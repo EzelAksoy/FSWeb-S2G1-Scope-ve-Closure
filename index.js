@@ -30,10 +30,17 @@ console.log('örnek görev:', ilkiniDon(['as','sa'],function(metin){return metin
   Aşağıdaki skor1 ve skor2 kodlarını inceleyiniz ve aşağıdaki soruları altına not alarak cevaplayın
   
   1. skor1 ve skor2 arasındaki fark nedir?
+
+  skor1 kodunda let skor fonsksiyon içince yazıldığından , bu fonksiyonu her calıstırdıgımızda skor 0 dan baslatacak.
+  skor2 de ise let skor globalde atalı durdugundan fonsksıyon calıstıgında skoru guncelleyecektır. sonuca göre yeni skor atayacaktır.
   
   2. Hangisi bir closure kullanmaktadır? Nasıl tarif edebilirsin? (yarınki derste öğreneceksin :) )
+
+  skor2 globalden veri aktardığından dolayı bir closure kullanmaktadır.  
   
   3. Hangi durumda skor1 tercih edilebilir? Hangi durumda skor2 daha mantıklıdır?
+
+  skor1 tek kullanımlık kendini guncellemeyecek durumlarda tercih ederim ,skor2 yi kendini güncelleyecek.
 */
 
 // skor1 kodları
@@ -64,9 +71,11 @@ Aşağıdaki takimSkoru() fonksiyonununda aşağıdakileri yapınız:
 Not: Bu fonskiyon, aşağıdaki diğer görevler için de bir callback fonksiyonu olarak da kullanılacak
 */
 
-function takimSkoru(/*Kodunuzu buraya yazınız*/){
-    /*Kodunuzu buraya yazınız*/
+function takimSkoru(){
+  let skor = Math.round(10 + Math.random()*15);
+return skor
 }
+takimSkoru()
 
 
 
@@ -86,9 +95,20 @@ Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
 }
 */ 
 
-function macSonucu(/*Kodunuzu buraya yazınız*/){
-  /*Kodunuzu buraya yazınız*/
+function macSonucu(Gelenfonksiyon,GelenSayı){
+  let EvSahibiSkor = 0;
+  let KonukSkor = 0 ;
+  let sonuc = { };
+  for(let i =0 ;i < GelenSayı ; i++){
+    EvSahibiSkor = EvSahibiSkor + Gelenfonksiyon();
+    KonukSkor = KonukSkor + Gelenfonksiyon();
+  }
+  sonuc.EvSahibi = EvSahibiSkor ;
+  sonuc.KonukTakim = KonukSkor ;
+
+  return sonuc;
 }
+console.log(macSonucu(takimSkoru,3));
 
 
 
@@ -109,11 +129,19 @@ Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
   */
 
 
-function periyotSkoru(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
+function periyotSkoru(Gelenfonksiyon) {
+let EvSahibiSkor= 0 ;
+let KonukSkor = 0 ;
+let toplamSkor ={ };
+EvSahibiSkor = Gelenfonksiyon ();
+KonukSkor = Gelenfonksiyon (); 
+toplamSkor.EvSahibi = EvSahibiSkor;
+toplamSkor.KonukTakim = KonukSkor ;
 
+return toplamSkor ;
+ 
 }
-
+console.log(periyotSkoru(takimSkoru));
 
 /* Zorlayıcı Görev 5: skorTabelasi() 
 Aşağıdaki skorTabelasi() fonksiyonunu kullanarak aşağıdakileri yapınız:
